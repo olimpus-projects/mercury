@@ -1,22 +1,34 @@
-# Welcome to React Router!
+# Welcome to Olimpus Cloud Portal
 
-A modern, production-ready template for building full-stack React applications using React Router.
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+A modern, production-ready frontend application for accessing and managing your Olimpus Cloud resources.
 
 ## Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- 🚀 Fast, responsive user interface
+- ⚡️ Real-time resource monitoring
+- 📦 Comprehensive cloud management tools
+- 🔄 Seamless integration with Olimpus Cloud APIs
+- 🔒 Secure authentication and authorization
+- 🎉 Intuitive, user-friendly design
+- 📊 Advanced analytics and reporting
 
-## Getting Started
+## Technologies
 
-### Installation
+- ⚛️ React - Frontend UI library
+- 🧭 React Router - Client-side routing
+- 🎨 Tailwind CSS - Utility-first CSS framework
+- 📦 TypeScript - Static type checking
+- 🔄 React Query - Data fetching and state management
+- 🛠️ Vite - Fast build tooling and development server
+- 🧪 Jest - Testing framework
+- 📱 Responsive design - Mobile-first approach
+- 🌙 Dark mode support - Customizable themes
+- 🔒 JWT Authentication - Secure user sessions
+
+
+## Getting Started ✅
+
+### Installation 📦
 
 Install the dependencies:
 
@@ -24,7 +36,7 @@ Install the dependencies:
 npm install
 ```
 
-### Development
+### Development 🧑‍💻
 
 Start the development server with HMR:
 
@@ -34,7 +46,7 @@ npm run dev
 
 Your application will be available at `http://localhost:5173`.
 
-## Building for Production
+## Building for Production 🚀
 
 Create a production build:
 
