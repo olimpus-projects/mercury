@@ -3,10 +3,14 @@ import { LoginForm } from './ui/LoginForm'
 
 const Login = () => {
     return (
-        <div className="login-container">
-            <h1>Login</h1>
-            <LoginForm />
-        </div>
+        <>
+            <div className="flex flex-col items-center justify-center min-h-screen">
+                <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+                    <h1 className="text-2xl font-bold text-center mb-6">Login</h1>
+                    <LoginForm />
+                </div>
+            </div>
+        </>
     )
 }
 
