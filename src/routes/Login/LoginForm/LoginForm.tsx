@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { useLoginStore } from "../Login.state"
+import { useLoginStore } from "./LoginForm.state"
 
 interface LoginFormProps { }
 
@@ -56,7 +56,7 @@ export function LoginForm({ }: LoginFormProps) {
                     aria-invalid={!!error}
                 />
             </div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full" disabled={isLoading} onClick={handleSubmit}>
                 {isLoading ? "Logging in..." : "Log in"}
             </Button>
         </form>

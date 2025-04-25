@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-
+import { useAuthStore } from '../../../states/Auth.state'
 interface LoginState {
     username: string
     password: string
@@ -39,6 +39,11 @@ export const useLoginStore = create<LoginState>((set, get) => ({
             // Simulate authentication check
             if (username === 'admin' && password === 'password') {
                 // Authentication successful
+                // Use the auth store to set authentication state
+                const { login: authLogin } = useAuthStore.getState()
+                authLogin(username, password)
+                // Reset the login form
+                get().reset()
                 console.log('Login successful')
                 // Here you would typically store auth token or user data
             } else {

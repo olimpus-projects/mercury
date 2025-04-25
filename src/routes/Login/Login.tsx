@@ -1,5 +1,5 @@
 import './Login.css'
-import { LoginForm } from './ui/LoginForm'
+import { LoginForm } from './LoginForm/LoginForm'
 
 const Login = () => {
     return (
