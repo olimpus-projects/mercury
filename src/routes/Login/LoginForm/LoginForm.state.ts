@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 import { useAuthStore } from '../../../states/Auth.state'
 interface LoginState {
-    username: string
+    email: string
     password: string
     isLoading: boolean
     error: string | null
-    setUsername: (username: string) => void
+    setEmail: (email: string) => void
     setPassword: (password: string) => void
     setError: (error: string | null) => void
     login: () => Promise<void>
@@ -13,20 +13,27 @@ interface LoginState {
 }
 
 export const useLoginStore = create<LoginState>((set, get) => ({
-    username: '',
+    email: '',
     password: '',
     isLoading: false,
     error: null,
 
-    setUsername: (username) => set({ username }),
+    setEmail: (email) => set({ email }),
     setPassword: (password) => set({ password }),
     setError: (error) => set({ error }),
 
     login: async () => {
-        const { username, password } = get()
+        const { email, password } = get()
 
-        if (!username || !password) {
-            set({ error: 'Username and password are required' })
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!email || !emailRegex.test(email)) {
+            set({ error: 'Please enter a valid email address' })
+            return
+        }
+
+        if (!password) {
+            set({ error: 'Password is required' })
             return
         }
 
@@ -37,17 +44,17 @@ export const useLoginStore = create<LoginState>((set, get) => ({
             await new Promise(resolve => setTimeout(resolve, 1000))
 
             // Simulate authentication check
-            if (username === 'admin' && password === 'password') {
+            if (email === 'admin@example.com' && password === 'password') {
                 // Authentication successful
                 // Use the auth store to set authentication state
                 const { login: authLogin } = useAuthStore.getState()
-                authLogin(username, password)
+                authLogin(email, password)
                 // Reset the login form
                 get().reset()
                 console.log('Login successful')
                 // Here you would typically store auth token or user data
             } else {
-                set({ error: 'Invalid username or password' })
+                set({ error: 'Invalid email or password' })
             }
         } catch (error) {
             set({ error: 'An error occurred during login' })
@@ -57,5 +64,5 @@ export const useLoginStore = create<LoginState>((set, get) => ({
         }
     },
 
-    reset: () => set({ username: '', password: '', error: null })
+    reset: () => set({ email: '', password: '', error: null })
 }))

@@ -7,11 +7,11 @@ interface LoginFormProps { }
 
 export function LoginForm({ }: LoginFormProps) {
     const {
-        username,
+        email,
         password,
         isLoading,
         error,
-        setUsername,
+        setEmail,
         setPassword,
         login
     } = useLoginStore()
@@ -22,27 +22,27 @@ export function LoginForm({ }: LoginFormProps) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
             {error && (
                 <div className="p-3 text-sm text-destructive bg-destructive/10 rounded-md">
                     {error}
                 </div>
             )}
             <div className="space-y-2">
-                <label htmlFor="username" className="text-sm font-medium">
-                    Username
+                <label htmlFor="email" className="text-sm font-medium">
+                    Email
                 </label>
                 <Input
-                    id="username"
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Enter your username"
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
                     required
                     aria-invalid={!!error}
                 />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 flex-row">
                 <label htmlFor="password" className="text-sm font-medium">
                     Password
                 </label>
@@ -56,9 +56,11 @@ export function LoginForm({ }: LoginFormProps) {
                     aria-invalid={!!error}
                 />
             </div>
-            <Button type="submit" className="w-full" disabled={isLoading} onClick={handleSubmit}>
-                {isLoading ? "Logging in..." : "Log in"}
-            </Button>
+            <div className="flex justify-center">
+                <Button type="submit" className="w-1/4 cursor-pointer" disabled={isLoading} onClick={handleSubmit}>
+                    {isLoading ? "Logging in..." : "Log in"}
+                </Button>
+            </div>
         </form>
     )
 }
