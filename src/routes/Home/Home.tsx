@@ -1,17 +1,18 @@
-import { Button } from '@/components/ui/button'
+import { Header } from '@/components/template/Header/Header'
 import './Home.css'
-import { useNavigate } from 'react-router'
 
 function Home() {
-  const navigate = useNavigate()
+    document.title = "Home - Routes App"
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen gap-4">
-      <h1 className="text-4xl font-bold">Welcome to Routes App</h1>
-      <Button className="cursor-pointer" onClick={() => {
-        navigate('/login')
-      }}>Log in</Button>
-    </div>
+    <>
+      <Header />
+      <div className="flex flex-col justify-center items-center h-screen gap-4">
+        <p>👋 Welcome to Routes App 🫡</p>
+        <p>👷‍♂️This is just a placeholder for the future content 🚧</p>
+        <p>🛠️ In this page you can receive your users to link to the app or submit reports.</p>
+      </div>
+    </>
   )
 }
 

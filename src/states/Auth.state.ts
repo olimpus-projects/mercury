@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 interface AuthState {
     isAuthenticated: boolean;
-    user: { username: string } | null;
+    user: any | null;
     login: (username: string, password: string) => void;
     logout: () => void;
 }
@@ -14,8 +14,6 @@ export const useAuthStore = create<AuthState>()(
             isAuthenticated: false,
             user: null,
             login: (username, password) => {
-                // In a real app, you would validate credentials against an API
-                // This is just a simple example
                 if (username && password) {
                     set({ isAuthenticated: true, user: { username } });
                 }
@@ -25,7 +23,7 @@ export const useAuthStore = create<AuthState>()(
             },
         }),
         {
-            name: 'auth-storage', // name of the item in localStorage
+            name: 'auth-storage',
         }
     )
 )
