@@ -1,7 +1,18 @@
 import './Login.css'
 import { LoginForm } from './LoginForm/LoginForm'
+import { useEffect } from 'react'
+import { useAuthStore } from '@/states/Auth.state'
+import { useNavigate } from 'react-router'
 
 const Login = () => {
+    const { isAuthenticated } = useAuthStore()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/dashboard')
+        }
+    }, [isAuthenticated, navigate])
     return (
         <>
             <div className="flex flex-col items-center justify-center min-h-screen">
