@@ -7,10 +7,10 @@ function Home() {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen gap-4">
-      <h1 className="text-4xl font-bold">Welcome to Routes App</h1>
+      <h1 className="text-4xl font-bold">Mercury CMS</h1>
       <Button className="cursor-pointer" onClick={() => {
         navigate('/login')
-      }}>Log in</Button>
+      }}>Sign in</Button>
     </div>
   )
 }
