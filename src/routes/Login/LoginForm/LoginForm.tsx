@@ -11,14 +11,17 @@ export function LoginForm({ }: LoginFormProps) {
         password,
         isLoading,
         error,
+        currentStep,
         setEmail,
         setPassword,
-        login
+        confirmEmail,
+        goBackToEmail,
+        loginWithEmail
     } = useLoginStore()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        await login()
+        await loginWithEmail()
     }
 
     return (
@@ -28,39 +31,82 @@ export function LoginForm({ }: LoginFormProps) {
                     {error}
                 </div>
             )}
-            <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium">
-                    Email
-                </label>
-                <Input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                    aria-invalid={!!error}
-                />
-            </div>
-            <div className="space-y-2 flex-row">
-                <label htmlFor="password" className="text-sm font-medium">
-                    Password
-                </label>
-                <Input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                    required
-                    aria-invalid={!!error}
-                />
-            </div>
-            <div className="flex justify-center">
-                <Button type="submit" className="w-1/4 cursor-pointer" disabled={isLoading} onClick={handleSubmit}>
-                    {isLoading ? "Logging in..." : "Log in"}
-                </Button>
-            </div>
+            <div className="text-xs text-muted-foreground">Step {currentStep} of 2</div>
+
+            {currentStep === 1 && (
+                <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium">
+                        Email
+                    </label>
+                    <Input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email"
+                        required
+                        aria-invalid={!!error}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault()
+                                confirmEmail()
+                            }
+                        }}
+                    />
+                    <div className="flex justify-end">
+                        <Button
+                            type="button"
+                            className="cursor-pointer"
+                            disabled={isLoading}
+                            onClick={confirmEmail}
+                        >
+                            Next
+                        </Button>
+                    </div>
+                </div>
+            )}
+
+            {currentStep === 2 && (
+                <div className="space-y-2">
+                    <label htmlFor="password" className="text-sm font-medium">
+                        Password
+                    </label>
+                    <Input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        required
+                        aria-invalid={!!error}
+                        onKeyDown={async (e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault()
+                                await handleSubmit(e)
+                            }
+                        }}
+                    />
+                    <div className="flex items-center justify-between">
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            className="cursor-pointer"
+                            disabled={isLoading}
+                            onClick={goBackToEmail}
+                        >
+                            Back
+                        </Button>
+                        <Button
+                            type="submit"
+                            className="cursor-pointer"
+                            disabled={isLoading}
+                            onClick={handleSubmit}
+                        >
+                            {isLoading ? "Logging in..." : "Login"}
+                        </Button>
+                    </div>
+                </div>
+            )}
         </form>
     )
 }

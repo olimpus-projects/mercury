@@ -5,10 +5,13 @@ interface LoginState {
     password: string
     isLoading: boolean
     error: string | null
+    currentStep: 1 | 2
     setEmail: (email: string) => void
     setPassword: (password: string) => void
     setError: (error: string | null) => void
-    login: () => Promise<void>
+    confirmEmail: () => void
+    goBackToEmail: () => void
+    loginWithEmail: () => Promise<void>
     reset: () => void
 }
 
@@ -17,12 +20,28 @@ export const useLoginStore = create<LoginState>((set, get) => ({
     password: '',
     isLoading: false,
     error: null,
+    currentStep: 1,
 
     setEmail: (email) => set({ email }),
     setPassword: (password) => set({ password }),
     setError: (error) => set({ error }),
 
-    login: async () => {
+    confirmEmail: () => {
+        const { email } = get()
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!email || !emailRegex.test(email)) {
+            set({ error: 'Please enter a valid email address' })
+            return
+        }
+        set({ error: null, currentStep: 2 })
+    },
+
+    goBackToEmail: () => {
+        // Clear password and return to step 1
+        set({ currentStep: 1, password: '', error: null })
+    },
+
+    loginWithEmail: async () => {
         const { email, password } = get()
 
         // Email validation
@@ -64,5 +83,5 @@ export const useLoginStore = create<LoginState>((set, get) => ({
         }
     },
 
-    reset: () => set({ email: '', password: '', error: null })
+    reset: () => set({ email: '', password: '', error: null, currentStep: 1 })
 }))
