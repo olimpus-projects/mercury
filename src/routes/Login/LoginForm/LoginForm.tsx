@@ -3,9 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useLoginStore } from "./LoginForm.state"
 
-interface LoginFormProps { }
-
-export function LoginForm({ }: LoginFormProps) {
+export function LoginForm(): React.ReactElement {
     const {
         email,
         password,
@@ -19,7 +17,7 @@ export function LoginForm({ }: LoginFormProps) {
         loginWithEmail
     } = useLoginStore()
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault()
         await loginWithEmail()
     }
