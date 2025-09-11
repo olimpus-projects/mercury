@@ -8,7 +8,7 @@
     
     # Build
     COPY . .
-    RUN npm run build
+    RUN npm run local:build
     
     # ---- Runtime stage ----
     FROM nginx:1.27-alpine AS runtime
