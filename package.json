@@ -1,14 +1,16 @@
 {
   "name": "routes-web-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "add:component": "npx shadcn@latest add"
+    "shadcn:add-component": "npx shadcn@latest add",
+    "local:build": "tsc -b && vite build",
+    "local:start": "vite preview",
+    "docker:build": "docker build -t mercury-app -f .dockerfile .",
+    "docker:start": "docker run -p 3000:80 mercury-app"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.0",
