@@ -1,10 +1,8 @@
-import './Home.css'
+import { HomeHeroSection } from '../../components/Hero/HomeHeroSection'
 
 function Home() {
   return (
-    <div className="hello-world">
-      <h1>Hello, World!</h1>
-    </div>
+      <HomeHeroSection />
   )
 }
 
